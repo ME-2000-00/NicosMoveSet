@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "daemon",
+  "version": "${version}",
+  "name": "NicosMoveSet",
+  "description": "a mod that adds classes or smth like that",
+  "authors": [],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/daemon/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "fabric-datagen": [
+      "net.me.daemon.client.MainDataGenerator"
+    ],
+    "client": [
+      "net.me.daemon.client.MainClient"
+    ],
+    "main": [
+      "net.me.daemon.Main"
+    ]
+  },
+  "mixins": [
+    "daemon.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric-api": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
