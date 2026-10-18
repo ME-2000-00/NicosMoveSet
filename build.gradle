@@ -23,6 +23,34 @@ repositories {
     // Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
     // See https://docs.gradle.org/current/userguide/declaring_repositories.html
     // for more information about repositories.
+    maven {
+        name = "Terraformers"
+        url = "https://maven.terraformersmc.com/"
+    }
+
+    maven { // For ImGuiMC
+        url = "https://maven.ryanhcode.dev/releases"
+        name = "RyanHCode Maven"
+    }
+    maven { // For Veil
+        name = 'BlameJared Maven (CrT / Bookshelf)'
+        url = 'https://maven.blamejared.com'
+    }
+
+    maven {
+        name = 'GeckoLib'
+        url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
+        content {
+            includeGroup("software.bernie.geckolib")
+        }
+    }
+    mavenCentral()
+    maven {
+        name = "RedlanceMinecraft"
+        url = uri("https://repo.redlance.org/public")
+    }
+
+    maven { url = "https://pkgs.dev.azure.com/djtheredstoner/DevAuth/_packaging/public/maven/v1" }
 }
 
 dependencies {
@@ -32,6 +60,24 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
+    modImplementation("foundry.veil:veil-fabric-${project.minecraft_version}:${project.veil_version}") {
+        exclude group: "maven.modrinth"
+        exclude group: "me.fallenbreath"
+        exclude group: "org.spongepowered", module: "mixin"
+    }
+
+    modImplementation("foundry.imguimc:imguimc-fabric-${project.minecraft_version}:${project.imguimc_version}") {
+        exclude group: "org.spongepowered", module: "mixin"
+    }
+
+    modImplementation("com.terraformersmc:modmenu:${project.modmenu_version}")
+
+    modImplementation "software.bernie.geckolib:geckolib-fabric-${minecraft_version}:${geckolib_version}"
+
+    modImplementation("com.zigythebird.playeranim:PlayerAnimationLibFabric:${project.pal_version}+mc.${project.minecraft_version}")
+
+    modRuntimeOnly("me.djtheredstoner:DevAuth-fabric:1.2.1")
 }
 
 processResources {
