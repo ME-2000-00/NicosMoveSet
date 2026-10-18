@@ -31,7 +31,7 @@ public class ModItemGroups {
             Registries.ITEM_GROUP,
             Main.get_path("reaper_item_group"),
             FabricItemGroup.builder()
-                    .icon(() -> new ItemStack(ModItems.SCYTHE))
+                    .icon(() -> new ItemStack(ModItems.LOGGIN_PAD))
                     .displayName(Text.literal("Reaper"))
                     .entries(((displayContext, entries) -> {
                         entries.add(ModItems.SCYTHE);
