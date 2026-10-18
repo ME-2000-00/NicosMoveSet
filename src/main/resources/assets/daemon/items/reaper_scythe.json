@@ -1,0 +1,9 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "daemon:item/reaper_scythe",
+    "model": {
+      "type": "geckolib:geckolib"
+    }
+  }
+}
