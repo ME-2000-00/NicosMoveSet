@@ -24,4 +24,8 @@ public record SoulBarRecord(float souls) {
     public SoulBarRecord add(float amount) {
         return new SoulBarRecord(Math.max(0, souls + amount));
     }
+
+    public SoulBarRecord sub(float amount) {
+        return new SoulBarRecord(Math.max(0, souls - amount));
+    }
 }

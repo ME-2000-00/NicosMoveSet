@@ -19,7 +19,7 @@ public class ModItemGroups {
             Registries.ITEM_GROUP,
             Main.get_path("eva_item_group"),
             FabricItemGroup.builder()
-                    .icon(() -> new ItemStack(ModItems.SCYTHE))
+                    .icon(() -> new ItemStack(ModItems.LOGGIN_PAD))
                     .displayName(Text.literal("The System"))
                     .entries(((displayContext, entries) -> {
                         entries.add(ModItems.LOGGIN_PAD);
@@ -31,7 +31,7 @@ public class ModItemGroups {
             Registries.ITEM_GROUP,
             Main.get_path("reaper_item_group"),
             FabricItemGroup.builder()
-                    .icon(() -> new ItemStack(ModItems.LOGGIN_PAD))
+                    .icon(() -> new ItemStack(ModItems.SCYTHE))
                     .displayName(Text.literal("Reaper"))
                     .entries(((displayContext, entries) -> {
                         entries.add(ModItems.SCYTHE);
