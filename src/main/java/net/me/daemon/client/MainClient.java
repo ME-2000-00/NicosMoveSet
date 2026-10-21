@@ -2,6 +2,7 @@ package net.me.daemon.client;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
+import net.me.daemon.client.animations.ModPlayerAnimations;
 import net.me.daemon.dataattatchment.ModDataAttatchments;
 import net.me.daemon.dataattatchment.records.player.SoulBarRecord;
 import net.me.daemon.items.ModItems;
@@ -16,7 +17,10 @@ public class MainClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         // other registries
+        ModPlayerAnimations.register();
 
+
+        // TODO: note down in notion how to add new abilites and how to add them to weapons
 
         // add ability gatherers here
         ClientAbilityInputs.register(ModAbilities.TEST_ABILITY, () -> Unit.INSTANCE);

@@ -35,7 +35,6 @@ public class Scythe extends SwordItem implements GeoItem, AbilityWeapon {
     // https://github.com/bernie-g/geckolib/wiki/Geckolib-Items-(Geckolib4)
 
     private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
-    // TODO: add all 3 abilities
 
     public Scythe(ToolMaterial toolMaterial, Settings settings) {
         super(toolMaterial, settings);
@@ -86,6 +85,7 @@ public class Scythe extends SwordItem implements GeoItem, AbilityWeapon {
 
 
 
+    // TODO: add all 3 abilities
     @Override
     public List<Ability<?>> getAbilities() {
         return List.of(ModAbilities.TEST_ABILITY);
