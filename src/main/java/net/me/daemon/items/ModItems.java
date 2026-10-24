@@ -2,6 +2,7 @@ package net.me.daemon.items;
 
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.me.daemon.Main;
+import net.me.daemon.components.ModComponents;
 import net.me.daemon.items.custom.Scythe;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
@@ -18,7 +19,9 @@ public class ModItems {
             new Scythe(ToolMaterials.NETHERITE,new Item.Settings()
                     .attributeModifiers(SwordItem.createAttributeModifiers(
                             ToolMaterials.NETHERITE, 12, -2f
-                    ))));
+                    ))
+                    .component(ModComponents.SCYTHE_STATE, false)
+            ));
 
 
 

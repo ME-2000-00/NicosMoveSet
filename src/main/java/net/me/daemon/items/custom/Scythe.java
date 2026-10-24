@@ -1,15 +1,23 @@
 package net.me.daemon.items.custom;
 
 import com.google.common.base.Suppliers;
+import com.terraformersmc.modmenu.util.mod.Mod;
+import com.zigythebird.playeranim.animation.PlayerAnimationController;
+import com.zigythebird.playeranim.api.PlayerAnimationAccess;
+import net.me.daemon.Main;
 import net.me.daemon.abilities.abilityextends.Ability;
 import net.me.daemon.client.ModAbilities;
+import net.me.daemon.client.animations.ModPlayerAnimations;
+import net.me.daemon.components.ModComponents;
 import net.me.daemon.items.geoitemrenderers.ScytheRenderer;
 import net.me.daemon.items.interfaces.AbilityWeapon;
+import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.item.BuiltinModelItemRenderer;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
 import net.minecraft.item.ToolMaterial;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
@@ -20,6 +28,11 @@ import software.bernie.geckolib.animatable.SingletonGeoAnimatable;
 import software.bernie.geckolib.animatable.client.GeoRenderProvider;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animation.PlayState;
+import software.bernie.geckolib.animation.RawAnimation;
+import software.bernie.geckolib.constant.DataTickets;
+import software.bernie.geckolib.constant.dataticket.SerializableDataTicket;
 import software.bernie.geckolib.renderer.GeoItemRenderer;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
@@ -29,12 +42,12 @@ import java.util.function.Supplier;
 
 public class Scythe extends SwordItem implements GeoItem, AbilityWeapon {
 
-    // smth like that for equip animation?
-    // TODO: figure out the mess that are geckolib items
-    // private static final RawAnimation ACTIVATE_ANIM = RawAnimation.begin().thenPlay("use.activate");
-    // https://github.com/bernie-g/geckolib/wiki/Geckolib-Items-(Geckolib4)
 
     private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
+
+    private static final RawAnimation FOLD_OPEN_ANIM = RawAnimation.begin().thenPlayAndHold("use.fold_open");
+    private static final RawAnimation FOLD_CLOSED_ANIM = RawAnimation.begin().thenPlayAndHold("use.fold_closed");
+
 
     public Scythe(ToolMaterial toolMaterial, Settings settings) {
         super(toolMaterial, settings);
@@ -42,23 +55,32 @@ public class Scythe extends SwordItem implements GeoItem, AbilityWeapon {
         SingletonGeoAnimatable.registerSyncedAnimatable(this);
     }
 
-    // M2
+    // M2 fold
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-        // makes everything run serverside
-        if (!world.isClient) return super.use(world, user, hand);
+        ItemStack stack = user.getStackInHand(hand);
 
-        // this print happens on the server
-        user.sendMessage(Text.literal("switched mode"));
+        if (!world.isClient) {
 
-        return super.use(world, user, hand);
+            GeoItem.getOrAssignId(stack, (ServerWorld) world);
+            boolean open = stack.getOrDefault(ModComponents.SCYTHE_STATE, false);
+            stack.set(ModComponents.SCYTHE_STATE, !open);
+        } else {
+            PlayerAnimationController controller = (PlayerAnimationController) PlayerAnimationAccess.getPlayerAnimationLayer(
+                    (AbstractClientPlayerEntity) user, ModPlayerAnimations.SCYTHE_LAYER);
+
+            controller.triggerAnimation(ModPlayerAnimations.SCYTHE_OPEN_ANIM.get());
+        }
+        return TypedActionResult.consume(stack); // consume = no arm swing, unlike success
     }
 
 
     // for geckolib
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-
+        controllerRegistrar.add(new AnimationController<>(this, "Activation", 0, state -> PlayState.STOP)
+                .triggerableAnim("open", FOLD_OPEN_ANIM)
+                .triggerableAnim("close", FOLD_CLOSED_ANIM));
     }
 
     @Override
@@ -89,5 +111,10 @@ public class Scythe extends SwordItem implements GeoItem, AbilityWeapon {
     @Override
     public List<Ability<?>> getAbilities() {
         return List.of(ModAbilities.TEST_ABILITY);
+    }
+
+    @Override
+    public boolean allowComponentsUpdateAnimation(PlayerEntity player, Hand hand, ItemStack oldStack, ItemStack newStack) {
+        return false;
     }
 }

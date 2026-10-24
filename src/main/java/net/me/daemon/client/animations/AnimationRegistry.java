@@ -30,6 +30,6 @@ public class AnimationRegistry {
     }
 
     public static Supplier<RawAnimation> register(Identifier animationId) {
-        return register(animationId, Animation.LoopType.LOOP);
+        return register(animationId, Animation.LoopType.DEFAULT);
     }
 }

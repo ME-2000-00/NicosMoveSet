@@ -3,9 +3,12 @@ package net.me.daemon;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityCombatEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.fabricmc.loader.api.ModContainer;
 import net.me.daemon.abilities.AbilityHandler;
 import net.me.daemon.blocks.ModBlocks;
 import net.me.daemon.client.ModAbilities;
+import net.me.daemon.commands.ModCommands;
+import net.me.daemon.components.ModComponents;
 import net.me.daemon.dataattatchment.ModDataAttatchments;
 import net.me.daemon.dataattatchment.records.player.SoulBarRecord;
 import net.me.daemon.items.ModItems;
@@ -36,7 +39,8 @@ public class Main implements ModInitializer {
         ModBlocks.register();
         ModItemGroups.register();
         ModDataAttatchments.register();
-
+        ModComponents.register();
+        ModCommands.register();
 
         ModPackets.registerC2S();
         ModPackets.registerS2C();
@@ -50,11 +54,17 @@ public class Main implements ModInitializer {
 
             if (!(entity instanceof ServerPlayerEntity player)) return;
             if (livingEntity instanceof PlayerEntity) return;
+            if (!player.getMainHandStack().isOf(ModItems.SCYTHE)) return;
             // living entity is the thing that died, entity is the killer
 
             SoulBarRecord current = player.getAttachedOrCreate(ModDataAttatchments.SOUL_BAR_ATTATCHMENT);
 
             // TODO: change it to work individually for different entities
+
+
+
+            // goal calc rn:  soul_add == (entity.hp / 3) + (entity.hp / 3) * (sqrt(entity.marked_status.stack) * 0.5)
+
             player.setAttached(ModDataAttatchments.SOUL_BAR_ATTATCHMENT, current.add( livingEntity.getMaxHealth() / 3));
 
         }));

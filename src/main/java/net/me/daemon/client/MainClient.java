@@ -4,9 +4,7 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.me.daemon.client.animations.ModPlayerAnimations;
 import net.me.daemon.dataattatchment.ModDataAttatchments;
-import net.me.daemon.dataattatchment.records.player.SoulBarRecord;
 import net.me.daemon.items.ModItems;
-import net.me.daemon.packets.ModPackets;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.text.Text;
@@ -30,6 +28,7 @@ public class MainClient implements ClientModInitializer {
 
 
         // debug soul render text
+        // TODO: make a proper GUI for this
         HudRenderCallback.EVENT.register(((drawContext, renderTickCounter) -> {
             MinecraftClient client = MinecraftClient.getInstance();
             // waits for a player to exist or tat the hud isn't hidden, otherwise it returns
