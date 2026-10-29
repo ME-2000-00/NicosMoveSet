@@ -11,14 +11,19 @@ import net.me.daemon.client.animations.ModPlayerAnimations;
 import net.me.daemon.components.ModComponents;
 import net.me.daemon.items.geoitemrenderers.ScytheRenderer;
 import net.me.daemon.items.interfaces.AbilityWeapon;
+import net.me.daemon.util.PALHelperClass;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.item.BuiltinModelItemRenderer;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.StackReference;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
 import net.minecraft.item.ToolMaterial;
+import net.minecraft.screen.slot.Slot;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
+import net.minecraft.util.ClickType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
@@ -61,17 +66,12 @@ public class Scythe extends SwordItem implements GeoItem, AbilityWeapon {
         ItemStack stack = user.getStackInHand(hand);
 
         if (!world.isClient) {
-
             GeoItem.getOrAssignId(stack, (ServerWorld) world);
             boolean open = stack.getOrDefault(ModComponents.SCYTHE_STATE, false);
             stack.set(ModComponents.SCYTHE_STATE, !open);
-        } else {
-            PlayerAnimationController controller = (PlayerAnimationController) PlayerAnimationAccess.getPlayerAnimationLayer(
-                    (AbstractClientPlayerEntity) user, ModPlayerAnimations.SCYTHE_LAYER);
-
-            controller.triggerAnimation(ModPlayerAnimations.SCYTHE_OPEN_ANIM.get());
+            PALHelperClass.broadcast((ServerPlayerEntity) user, ModPlayerAnimations.SCYTHE_OPEN_ANIM);
         }
-        return TypedActionResult.consume(stack); // consume = no arm swing, unlike success
+        return TypedActionResult.consume(stack); // consume == no arm swing
     }
 
 
@@ -79,6 +79,7 @@ public class Scythe extends SwordItem implements GeoItem, AbilityWeapon {
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
         controllerRegistrar.add(new AnimationController<>(this, "Activation", 0, state -> PlayState.STOP)
+                // registering triggerable Animations
                 .triggerableAnim("open", FOLD_OPEN_ANIM)
                 .triggerableAnim("close", FOLD_CLOSED_ANIM));
     }
@@ -117,4 +118,10 @@ public class Scythe extends SwordItem implements GeoItem, AbilityWeapon {
     public boolean allowComponentsUpdateAnimation(PlayerEntity player, Hand hand, ItemStack oldStack, ItemStack newStack) {
         return false;
     }
+
+    @Override
+    public boolean onClicked(ItemStack stack, ItemStack otherStack, Slot slot, ClickType clickType, PlayerEntity player, StackReference cursorStackReference) {
+        return super.onClicked(stack, otherStack, slot, clickType, player, cursorStackReference);
+    }
+
 }

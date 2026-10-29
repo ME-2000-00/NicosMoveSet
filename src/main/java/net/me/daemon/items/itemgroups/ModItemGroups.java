@@ -15,14 +15,14 @@ public class ModItemGroups {
 
 
 
-    public static final ItemGroup EVA = Registry.register(
+    public static final ItemGroup CAPRI = Registry.register(
             Registries.ITEM_GROUP,
-            Main.get_path("eva_item_group"),
+            Main.get_path("capri_item_group"),
             FabricItemGroup.builder()
-                    .icon(() -> new ItemStack(ModItems.LOGGIN_PAD))
-                    .displayName(Text.literal("The System"))
+                    .icon(() -> new ItemStack(ModItems.USB))
+                    .displayName(Text.literal("Capri"))
                     .entries(((displayContext, entries) -> {
-                        entries.add(ModItems.LOGGIN_PAD);
+                        entries.add(ModItems.USB);
                     }))
                     .build()
     );

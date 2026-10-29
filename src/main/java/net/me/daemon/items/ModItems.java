@@ -24,10 +24,12 @@ public class ModItems {
             ));
 
 
+    // TODO: replace TS with capri
+    // ye i watched cp s2 a few days ago and YES i want to try to recreate capri's visuals at least
 
-    public static final Item LOGGIN_PAD = Registry.register(
+    public static final Item USB = Registry.register(
             Registries.ITEM,
-            Main.get_path("loggin_pad"),
+            Main.get_path("usb_stick"),
             new Item(new Item.Settings()));
 
 
