@@ -1,0 +1,7 @@
+{
+  "name": "scythe_open",
+  "loop_type": {
+    "geckolib_loop": "hold_last_frame",
+    "pal_loop": "play_once"
+  }
+}

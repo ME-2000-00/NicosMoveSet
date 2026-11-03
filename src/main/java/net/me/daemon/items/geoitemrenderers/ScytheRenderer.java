@@ -1,19 +1,23 @@
 package net.me.daemon.items.geoitemrenderers;
 
+import net.me.daemon.Main;
+import net.me.daemon.client.animation_linking.model.LinkedModel;
 import net.me.daemon.items.custom.Scythe;
-import net.me.daemon.items.geoitemmodels.ScytheModel;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.util.Identifier;
-import software.bernie.geckolib.cache.object.GeoBone;
 import software.bernie.geckolib.renderer.GeoItemRenderer;
+import software.bernie.geckolib.renderer.layer.AutoGlowingGeoLayer;
+
+
+
+
+
 
 public class ScytheRenderer extends GeoItemRenderer<Scythe> {
-
     public ScytheRenderer() {
-        super(new ScytheModel());
+        super(new LinkedModel<>(
+                Scythe.LINK_ID,
+                Main.get_path("geo/reaper_scythe.geo.json"),
+                Main.get_path("textures/item/reaper_scythe.png")));
+        addRenderLayer(new AutoGlowingGeoLayer<>(this));
     }
 }
+

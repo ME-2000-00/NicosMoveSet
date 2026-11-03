@@ -51,6 +51,11 @@ repositories {
     }
 
     maven { url = "https://pkgs.dev.azure.com/djtheredstoner/DevAuth/_packaging/public/maven/v1" }
+
+    maven { url 'https://maven.wispforest.io/releases/' }
+
+    // since owo 0.13.0, jitpack is required for kdl4j
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
@@ -78,18 +83,33 @@ dependencies {
     modImplementation("com.zigythebird.playeranim:PlayerAnimationLibFabric:${project.pal_version}+mc.${project.minecraft_version}")
 
     modRuntimeOnly("me.djtheredstoner:DevAuth-fabric:1.2.1")
+
+    modImplementation "io.wispforest:owo-lib:${project.owo_version}"
+    include "io.wispforest:owo-sentinel:${project.owo_version}"
 }
 
 processResources {
     inputs.property "version", project.version
     inputs.property "minecraft_version", project.minecraft_version
     inputs.property "loader_version", project.loader_version
+    inputs.property "veil_version", project.veil_version
+    inputs.property "geckolib_version", project.geckolib_version
+    inputs.property "owo_version", project.owo_version
+    inputs.property "imguimc_version", project.imguimc_version
+    inputs.property "pal_version", project.pal_version
+    inputs.property "modmenu_version", project.modmenu_version
     filteringCharset "UTF-8"
 
     filesMatching("fabric.mod.json") {
         expand "version": project.version,
                 "minecraft_version": project.minecraft_version,
-                "loader_version": project.loader_version
+                "loader_version": project.loader_version,
+                "veil_version": project.veil_version,
+                "geckolib_version": project.geckolib_version,
+                "owo_version": project.owo_version,
+                "imguimc_version": project.imguimc_version,
+                "pal_version": project.pal_version,
+                "modmenu_version": project.modmenu_version
     }
 }
 

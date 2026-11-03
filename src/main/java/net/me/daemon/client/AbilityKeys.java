@@ -14,10 +14,7 @@ import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.network.RegistryByteBuf;
 import org.lwjgl.glfw.GLFW;
-
-import javax.swing.text.JTextComponent;
 import java.util.List;
-import java.util.Map;
 
 public class AbilityKeys {
     private static final KeyBinding[] KEYS = new KeyBinding[3];

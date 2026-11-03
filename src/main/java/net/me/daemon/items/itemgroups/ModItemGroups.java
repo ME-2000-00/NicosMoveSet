@@ -14,18 +14,18 @@ public class ModItemGroups {
 
 
 
-
-    public static final ItemGroup CAPRI = Registry.register(
-            Registries.ITEM_GROUP,
-            Main.get_path("capri_item_group"),
-            FabricItemGroup.builder()
-                    .icon(() -> new ItemStack(ModItems.USB))
-                    .displayName(Text.literal("Capri"))
-                    .entries(((displayContext, entries) -> {
-                        entries.add(ModItems.USB);
-                    }))
-                    .build()
-    );
+// TODO: re-add when needed
+//    public static final ItemGroup CP = Registry.register(
+//            Registries.ITEM_GROUP,
+//            Main.get_path("cp_item_group"),
+//            FabricItemGroup.builder()
+//                    .icon(() -> new ItemStack(ModItems.USB))
+//                    .displayName(Text.literal("Cyber Punk"))
+//                    .entries(((displayContext, entries) -> {
+//                        entries.add(ModItems.USB);
+//                    }))
+//                    .build()
+//    );
 
     public static final ItemGroup REAPER = Registry.register(
             Registries.ITEM_GROUP,

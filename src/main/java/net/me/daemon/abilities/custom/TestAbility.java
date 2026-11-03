@@ -38,5 +38,6 @@ public class TestAbility extends SoulAbility<Unit> {
     @Override
     protected void cast(ServerPlayerEntity player, Unit data) {
         player.sendMessage(Text.literal("This is a test Soul Ability"));
+
     }
 }

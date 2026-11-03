@@ -22,6 +22,6 @@ public class ScytheModel extends GeoModel<Scythe> {
 
     @Override
     public Identifier getAnimationResource(Scythe scythe) {
-        return Main.get_path("animations/scythe/reaper_scythe.animation.json");
+        return Main.get_path("animations/scythe/scythe_open.animation.json");
     }
 }

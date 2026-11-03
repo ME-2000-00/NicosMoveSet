@@ -1,7 +1,7 @@
 {
 	"format_version": "1.8.0",
 	"animations": {
-		"open_pal": {
+		"scythe_open": {
 			"animation_length": 1.5,
 			"bones": {
 				"right_arm": {
@@ -58,14 +58,7 @@
 						}
 					}
 				}
-			},
-			"timeline": {
-				"0.4583": "daemon:scythe_open;"
 			}
-		},
-		"close_pal": {
-			"loop": true,
-			"animation_length": 1.5
 		}
 	}
 }

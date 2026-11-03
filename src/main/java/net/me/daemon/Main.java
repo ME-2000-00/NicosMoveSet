@@ -64,8 +64,10 @@ public class Main implements ModInitializer {
 
 
             // goal calc rn:  soul_add == (entity.hp / 3) + (entity.hp / 3) * (sqrt(entity.marked_status.stack) * 0.5)
+            float stacks = livingEntity.getAttachedOrCreate(ModDataAttatchments.MARKS_ATTATCHMENT).stacks();
+            float soul_add = (float) ((livingEntity.getMaxHealth() / 3) + (livingEntity.getMaxHealth() / 3) * (Math.sqrt(stacks) * 0.5));
 
-            player.setAttached(ModDataAttatchments.SOUL_BAR_ATTATCHMENT, current.add( livingEntity.getMaxHealth() / 3));
+            player.setAttached(ModDataAttatchments.SOUL_BAR_ATTATCHMENT, current.add(soul_add));
 
         }));
     }

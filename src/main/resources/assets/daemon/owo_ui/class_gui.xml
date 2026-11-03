@@ -1,0 +1,336 @@
+<owo-ui xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/wisp-forest/owo-lib/1.20/owo-ui.xsd">
+    <components>
+        <!-- Full-screen wrapper: transparent, only used to center the window -->
+        <flow-layout direction="vertical" id="class-selection-root">
+            <children>
+
+                <!-- Centered window -->
+                <!-- TODO BUT BIG:  FIX THE DAMN SCROLLING NOT CLIPPING THE GUI PROPERLY -->
+                <flow-layout direction="vertical" id="class-window">
+                    <children>
+                        <!-- Header -->
+                        <flow-layout direction="horizontal">
+                            <children>
+                                <flow-layout direction="vertical">
+                                    <children>
+                                        <label>
+                                            <text>Choose Your Class</text>
+                                            <shadow>true</shadow>
+                                        </label>
+                                        <label>
+                                            <text>Pick a class to see its abilities and equipment.</text>
+                                            <color>gray</color>
+                                        </label>
+                                    </children>
+                                    <gap>3</gap>
+                                    <sizing>
+                                        <horizontal method="fill">100</horizontal>
+                                    </sizing>
+                                </flow-layout>
+
+                            </children>
+                            <vertical-alignment>center</vertical-alignment>
+                            <sizing>
+                                <horizontal method="fill">100</horizontal>
+                                <vertical method="fixed">44</vertical>
+                            </sizing>
+                        </flow-layout>
+
+                        <!-- Main area: two separate dark panels side by side -->
+                        <flow-layout direction="horizontal">
+                            <children>
+
+                                <!-- LEFT PANEL: class list (scrollable) -->
+                                <scroll direction="vertical" id="class-list-scroll">
+                                    <flow-layout direction="vertical" id="class-list">
+                                        <children>
+                                            <label>
+                                                <text>Available Classes</text>
+                                                <color>gray</color>
+                                            </label>
+
+
+
+                                        </children>
+                                        <gap>5</gap>
+                                        <padding>
+                                            <all>8</all>
+                                        </padding>
+                                        <sizing>
+                                            <horizontal method="fill">100</horizontal>
+                                        </sizing>
+                                    </flow-layout>
+                                    <sizing>
+                                        <horizontal method="fixed">202</horizontal>
+                                        <vertical method="fill">100</vertical>
+                                    </sizing>
+                                    <surface>
+                                        <panel dark="true"/>
+                                    </surface>
+                                </scroll>
+
+                                <!-- RIGHT PANEL: selected class details (scrollable) -->
+                                <scroll direction="vertical" id="class-detail-scroll">
+                                    <flow-layout direction="vertical" id="class-detail">
+                                        <children>
+                                            <flow-layout direction="horizontal">
+                                                <children>
+                                                    <flow-layout direction="vertical">
+                                                        <children>
+                                                            <item id="class-icon">
+                                                                <stack>daemon:reaper_scythe</stack>
+                                                                <sizing>
+                                                                    <horizontal method="fixed">34</horizontal>
+                                                                    <vertical method="fixed">34</vertical>
+                                                                </sizing>
+                                                            </item>
+                                                        </children>
+                                                        <padding>
+                                                            <all>5</all>
+                                                        </padding>
+                                                        <surface>
+                                                            <panel-inset/>
+                                                        </surface>
+                                                    </flow-layout>
+
+                                                    <flow-layout direction="vertical">
+                                                        <children>
+                                                            <label id="class-name">
+                                                                <text>Reaper</text>
+                                                                <shadow>true</shadow>
+                                                            </label>
+                                                            <label id="class-role">
+                                                                <text>Damage class</text>
+                                                                <color>#BB4499</color>
+                                                            </label>
+                                                        </children>
+                                                        <gap>3</gap>
+                                                    </flow-layout>
+                                                </children>
+                                                <gap>10</gap>
+                                                <vertical-alignment>center</vertical-alignment>
+                                            </flow-layout>
+
+                                            <!-- Selected class description -->
+                                            <label id="class-description">
+                                                <text>Placeholder Description.</text>
+                                                <color>gray</color>
+                                                <max-width>380</max-width>
+                                                <margins><bottom>10</bottom></margins>
+                                            </label>
+
+                                            <!-- Selected class passive ability -->
+                                            <label>
+                                                <text>Passive Ability</text>
+                                                <color>gray</color>
+                                            </label>
+
+                                            <flow-layout direction="horizontal">
+                                                <children>
+                                                    <item id="ability-icon">
+                                                        <stack>minecraft:target</stack>
+                                                    </item>
+                                                    <flow-layout direction="vertical">
+                                                        <children>
+                                                            <label id="ability-name">
+                                                                <text>Reaper's Mark</text>
+                                                                <shadow>true</shadow>
+                                                            </label>
+                                                            <label>
+                                                                <text>Marks every hit enemy</text>
+                                                                <color>dark-gray</color>
+                                                            </label>
+                                                        </children>
+                                                        <gap>2</gap>
+                                                    </flow-layout>
+                                                </children>
+                                                <gap>8</gap>
+                                                <padding>
+                                                    <all>6</all>
+                                                </padding>
+                                                <vertical-alignment>center</vertical-alignment>
+                                                <sizing>
+                                                    <horizontal method="fill">100</horizontal>
+                                                </sizing>
+                                                <surface>
+                                                    <panel-inset/>
+                                                </surface>
+                                                <tooltip-text>The effect is stackable up to x times</tooltip-text>
+                                            </flow-layout>
+
+
+                                            <!-- Selected class abilites -->
+                                            <label>
+                                                <text>Abilities</text>
+                                                <color>gray</color>
+                                            </label>
+
+                                            <!-- TODO: keys need to update dynamically with the settings menu -->
+
+                                            <flow-layout direction="vertical" id="abilities-list">
+                                                <children>
+
+                                                </children>
+                                                <gap>4</gap>
+                                                <sizing><horizontal method="fill">100</horizontal></sizing>
+                                            </flow-layout>
+                                        </children>
+                                        <gap>8</gap>
+                                        <padding>
+                                            <all>12</all>
+                                        </padding>
+                                        <sizing>
+                                            <horizontal method="fill">100</horizontal>
+                                        </sizing>
+                                    </flow-layout>
+                                    <sizing>
+                                        <horizontal method="fixed">444</horizontal>
+                                        <vertical method="fill">100</vertical>
+                                    </sizing>
+                                    <surface>
+                                        <panel dark="true"/>
+                                    </surface>
+                                </scroll>
+
+                            </children>
+                            <gap>6</gap>
+                            <sizing>
+                                <horizontal method="fill">100</horizontal>
+                                <vertical method="fixed">350</vertical>
+                            </sizing>
+                        </flow-layout>
+
+                        <!-- Footer -->
+                        <flow-layout direction="horizontal">
+                            <children>
+
+                                <!-- Select button -->
+                                <button id="confirm-button">
+                                    <text>Choose Class</text>
+                                    <sizing>
+                                        <horizontal method="fixed">150</horizontal>
+                                    </sizing>
+                                </button>
+                            </children>
+                            <gap>8</gap>
+                            <vertical-alignment>center</vertical-alignment>
+                            <sizing>
+                                <horizontal method="fill">100</horizontal>
+                                <vertical method="fixed">32</vertical>
+                            </sizing>
+                        </flow-layout>
+                    </children>
+
+                    <gap>6</gap>
+                    <padding>
+                        <all>9</all>
+                    </padding>
+                    <sizing>
+                        <horizontal method="fixed">670</horizontal>
+                        <vertical method="fixed">450</vertical>
+                    </sizing>
+                    <surface>
+                        <vanilla-translucent/>
+                    </surface>
+                </flow-layout>
+
+            </children>
+            <horizontal-alignment>center</horizontal-alignment>
+            <vertical-alignment>center</vertical-alignment>
+            <sizing>
+                <horizontal method="fill">100</horizontal>
+                <vertical method="fill">100</vertical>
+            </sizing>
+        </flow-layout>
+    </components>
+
+
+    <templates>
+        <!-- TODO: implement the new class entry -->
+
+        <template name="class-entry">
+            <flow-layout direction="horizontal">
+                <children>
+
+                    <box id="entry-marker">
+                        <color>#00000000</color>
+                        <fill>true</fill>
+                        <sizing>
+                            <horizontal method="fixed">3</horizontal>
+                            <vertical method="fixed">38</vertical>
+                        </sizing>
+                    </box>
+
+                    <stack-layout>
+                        <children>
+                            <button id="entry-button">
+                                <text>{{Name}}</text>
+                                <sizing>
+                                    <horizontal method="fixed">172</horizontal>
+                                    <vertical method="fixed">38</vertical>
+                                </sizing>
+                            </button>
+
+                            <flow-layout direction="horizontal" id="entry-icon-frame">
+                                <children>
+                                    <item id="entry-icon">
+                                        <stack>{{namespace}}:{{item-path}}</stack>
+                                        <tooltip-text>{{tool-tip}}</tooltip-text>
+                                    </item>
+                                </children>
+                                <padding><all>3</all></padding>
+                                <surface><panel-inset/></surface>
+                                <positioning type="absolute">6,8</positioning>
+                            </flow-layout>
+                        </children>
+                    </stack-layout>
+
+                </children>
+                <gap>3</gap>
+            </flow-layout>
+        </template>
+
+        <!-- TODO: implement the new ability entry -->
+
+        <template name="ability-entry">
+            <flow-layout direction="horizontal">
+                <children>
+                    <!-- keycap -->
+                    <flow-layout direction="horizontal">
+                        <children>
+                            <label id="key-label">
+                                <text>{{key}}</text>
+                                <color>#404040</color>
+                            </label>
+                        </children>
+                        <padding>
+                            <left>5</left><right>5</right><top>4</top><bottom>4</bottom>
+                        </padding>
+                        <surface><panel dark="false"/></surface>
+                    </flow-layout>
+
+                    <!-- name + description -->
+                    <flow-layout direction="vertical">
+                        <children>
+                            <label id="ability-label">
+                                <text>{{name}}</text>
+                                <shadow>true</shadow>
+                            </label>
+                            <label id="ability-desc">
+                                <text>{{description}}</text>
+                                <color>gray</color>
+                            </label>
+                        </children>
+                        <gap>2</gap>
+                    </flow-layout>
+                </children>
+                <gap>8</gap>
+                <padding><all>5</all></padding>
+                <vertical-alignment>center</vertical-alignment>
+                <sizing><horizontal method="fill">100</horizontal></sizing>
+                <surface><panel-inset/></surface>
+            </flow-layout>
+        </template>
+    </templates>
+</owo-ui>

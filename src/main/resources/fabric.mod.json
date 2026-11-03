@@ -14,7 +14,8 @@
 
     ],
     "client": [
-      "net.me.daemon.client.MainClient"
+      "net.me.daemon.client.MainClient",
+      "net.me.daemon.client.animation_linking.DaemonAnimationClientInitalizer"
     ],
     "main": [
       "net.me.daemon.Main"
@@ -26,6 +27,15 @@
   "depends": {
     "fabricloader": ">=${loader_version}",
     "fabric-api": "*",
-    "minecraft": "${minecraft_version}"
+    "minecraft": "${minecraft_version}",
+    "veil": "${veil_version}",
+    "geckolib": "${geckolib_version}",
+    "owo": "${owo_version}",
+    "java": ">=21",
+    "imguimc": "${imguimc_version}",
+    "player_animation_library": "${pal_version}"
+  },
+  "suggests": {
+    "modmenu": "${modmenu_version}"
   }
 }

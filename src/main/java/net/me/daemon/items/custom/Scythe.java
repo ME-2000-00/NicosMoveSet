@@ -1,18 +1,13 @@
 package net.me.daemon.items.custom;
 
-import com.google.common.base.Suppliers;
-import com.terraformersmc.modmenu.util.mod.Mod;
-import com.zigythebird.playeranim.animation.PlayerAnimationController;
-import com.zigythebird.playeranim.api.PlayerAnimationAccess;
 import net.me.daemon.Main;
 import net.me.daemon.abilities.abilityextends.Ability;
 import net.me.daemon.client.ModAbilities;
-import net.me.daemon.client.animations.ModPlayerAnimations;
-import net.me.daemon.components.ModComponents;
+import net.me.daemon.client.animation_linking.DaemonAnimationBuilder;
+import net.me.daemon.client.animation_linking.DaemonAnimationNetwork;
+import net.me.daemon.client.animation_linking.DaemonAnimationUtil;
 import net.me.daemon.items.geoitemrenderers.ScytheRenderer;
 import net.me.daemon.items.interfaces.AbilityWeapon;
-import net.me.daemon.util.PALHelperClass;
-import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.item.BuiltinModelItemRenderer;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.StackReference;
@@ -22,9 +17,9 @@ import net.minecraft.item.ToolMaterial;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.text.Text;
 import net.minecraft.util.ClickType;
 import net.minecraft.util.Hand;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
@@ -35,23 +30,16 @@ import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.animation.AnimatableManager;
 import software.bernie.geckolib.animation.AnimationController;
 import software.bernie.geckolib.animation.PlayState;
-import software.bernie.geckolib.animation.RawAnimation;
-import software.bernie.geckolib.constant.DataTickets;
-import software.bernie.geckolib.constant.dataticket.SerializableDataTicket;
-import software.bernie.geckolib.renderer.GeoItemRenderer;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.List;
 import java.util.function.Consumer;
-import java.util.function.Supplier;
 
 public class Scythe extends SwordItem implements GeoItem, AbilityWeapon {
 
 
     private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
-
-    private static final RawAnimation FOLD_OPEN_ANIM = RawAnimation.begin().thenPlayAndHold("use.fold_open");
-    private static final RawAnimation FOLD_CLOSED_ANIM = RawAnimation.begin().thenPlayAndHold("use.fold_closed");
+    public static final Identifier LINK_ID = Main.get_path("scythe_open");
 
 
     public Scythe(ToolMaterial toolMaterial, Settings settings) {
@@ -64,24 +52,24 @@ public class Scythe extends SwordItem implements GeoItem, AbilityWeapon {
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack stack = user.getStackInHand(hand);
+        if (user.getItemCooldownManager().isCoolingDown(this)) return TypedActionResult.pass(stack);
 
-        if (!world.isClient) {
-            GeoItem.getOrAssignId(stack, (ServerWorld) world);
-            boolean open = stack.getOrDefault(ModComponents.SCYTHE_STATE, false);
-            stack.set(ModComponents.SCYTHE_STATE, !open);
-            PALHelperClass.broadcast((ServerPlayerEntity) user, ModPlayerAnimations.SCYTHE_OPEN_ANIM);
+
+        if (world instanceof ServerWorld serverWorld && user instanceof ServerPlayerEntity serverPlayerEntity) {
+            triggerAnim(user, GeoItem.getOrAssignId(stack, serverWorld), "main", LINK_ID.getPath());
+            DaemonAnimationNetwork.sendPalPlay(serverPlayerEntity, LINK_ID);
         }
-        return TypedActionResult.consume(stack); // consume == no arm swing
+
+        return TypedActionResult.consume(stack); // consume == no arm swing probs
     }
 
 
     // for geckolib
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-        controllerRegistrar.add(new AnimationController<>(this, "Activation", 0, state -> PlayState.STOP)
-                // registering triggerable Animations
-                .triggerableAnim("open", FOLD_OPEN_ANIM)
-                .triggerableAnim("close", FOLD_CLOSED_ANIM));
+        AnimationController<Scythe> controller = new AnimationController<>(this, "main", 0, state -> PlayState.STOP);
+        DaemonAnimationUtil.addLinks(controller, LINK_ID);
+        controllerRegistrar.add(controller);
     }
 
     @Override

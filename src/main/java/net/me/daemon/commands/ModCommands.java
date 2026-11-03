@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.me.daemon.Main;
 import net.me.daemon.commands.custom.GetMarked;
 import net.me.daemon.commands.custom.MarkedTestCommand;
+import net.me.daemon.commands.custom.OpenScreen;
 import net.me.daemon.commands.interfaces.ModCommand;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
@@ -17,7 +18,8 @@ public class ModCommands {
     // add new commands here
     private static final List<Supplier<ModCommand>> COMMANDS = List.of(
             MarkedTestCommand::new,
-            GetMarked::new
+            GetMarked::new,
+            OpenScreen::new
     );
 
     public static void register() {
