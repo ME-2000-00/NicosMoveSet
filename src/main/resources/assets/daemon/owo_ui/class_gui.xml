@@ -49,9 +49,6 @@
                                                 <text>Available Classes</text>
                                                 <color>gray</color>
                                             </label>
-
-
-
                                         </children>
                                         <gap>5</gap>
                                         <padding>
@@ -79,7 +76,7 @@
                                                     <flow-layout direction="vertical">
                                                         <children>
                                                             <item id="class-icon">
-                                                                <stack>daemon:reaper_scythe</stack>
+                                                                <stack>minecraft:barrier</stack>
                                                                 <sizing>
                                                                     <horizontal method="fixed">34</horizontal>
                                                                     <vertical method="fixed">34</vertical>
@@ -97,7 +94,7 @@
                                                     <flow-layout direction="vertical">
                                                         <children>
                                                             <label id="class-name">
-                                                                <text>Reaper</text>
+                                                                <text>PLACEHOLDER</text>
                                                                 <shadow>true</shadow>
                                                             </label>
                                                             <label id="class-role">
@@ -126,19 +123,19 @@
                                                 <color>gray</color>
                                             </label>
 
-                                            <flow-layout direction="horizontal">
+                                            <flow-layout direction="horizontal" id="passive-ability">
                                                 <children>
-                                                    <item id="ability-icon">
-                                                        <stack>minecraft:target</stack>
+                                                    <item id="passive-icon">
+                                                        <stack>minecraft:barrier</stack>
                                                     </item>
                                                     <flow-layout direction="vertical">
                                                         <children>
-                                                            <label id="ability-name">
-                                                                <text>Reaper's Mark</text>
+                                                            <label id="passive-name">
+                                                                <text>PLACEHOLDER</text>
                                                                 <shadow>true</shadow>
                                                             </label>
-                                                            <label>
-                                                                <text>Marks every hit enemy</text>
+                                                            <label id="passive-desc">
+                                                                <text>PLACEHOLDER</text>
                                                                 <color>dark-gray</color>
                                                             </label>
                                                         </children>
@@ -156,9 +153,41 @@
                                                 <surface>
                                                     <panel-inset/>
                                                 </surface>
-                                                <tooltip-text>The effect is stackable up to x times</tooltip-text>
+                                                <tooltip-text>PLACEHOLDER</tooltip-text>
                                             </flow-layout>
 
+                                            <!-- starter item -->
+                                            <label>
+                                                <text>Starter Item</text>
+                                                <color>gray</color>
+                                            </label>
+
+                                            <flow-layout direction="vertical" id="starter-item">
+                                                <children>
+                                                    <!-- name + description -->
+                                                    <flow-layout direction="horizontal">
+                                                        <children>
+                                                            <item id="starter-item-preview">
+                                                                <stack>minecraft:barrier</stack>
+                                                            </item>
+
+                                                            <label id="ability-desc">
+                                                                <text>PLACEHOLDER</text>
+                                                                <color>gray</color>
+                                                            </label>
+
+                                                        </children>
+                                                        <gap>2</gap>
+                                                        <padding><all>5</all></padding>
+                                                        <vertical-alignment>center</vertical-alignment><surface>
+                                                            <panel-inset/>
+                                                        </surface>
+                                                        <tooltip-text>PLACEHOLDER</tooltip-text>
+                                                    </flow-layout>
+                                                </children>
+                                                <gap>4</gap>
+                                                <sizing><horizontal method="fill">100</horizontal></sizing>
+                                            </flow-layout>
 
                                             <!-- Selected class abilites -->
                                             <label>
@@ -175,6 +204,7 @@
                                                 <gap>4</gap>
                                                 <sizing><horizontal method="fill">100</horizontal></sizing>
                                             </flow-layout>
+
                                         </children>
                                         <gap>8</gap>
                                         <padding>
@@ -265,7 +295,7 @@
                     <stack-layout>
                         <children>
                             <button id="entry-button">
-                                <text>{{Name}}</text>
+                                <text>{{name}}</text>
                                 <sizing>
                                     <horizontal method="fixed">172</horizontal>
                                     <vertical method="fixed">38</vertical>
@@ -275,8 +305,8 @@
                             <flow-layout direction="horizontal" id="entry-icon-frame">
                                 <children>
                                     <item id="entry-icon">
-                                        <stack>{{namespace}}:{{item-path}}</stack>
-                                        <tooltip-text>{{tool-tip}}</tooltip-text>
+                                        <stack>{{item}}</stack>
+                                        <tooltip-text>{{tooltip}}</tooltip-text>
                                     </item>
                                 </children>
                                 <padding><all>3</all></padding>

@@ -1,4 +1,4 @@
-package net.me.daemon.client.animation_linking.enums;
+package net.me.daemon.animation_linking.enums;
 
 
 import com.mojang.serialization.Codec;

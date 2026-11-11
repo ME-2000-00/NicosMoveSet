@@ -1,4 +1,4 @@
-package net.me.daemon.client.animation_linking;
+package net.me.daemon.animation_linking;
 
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;

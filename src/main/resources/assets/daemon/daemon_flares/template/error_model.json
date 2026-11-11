@@ -1,0 +1,22 @@
+{
+  "format": 1,
+  "layers": [
+    {
+      "name": "shaft",
+      "shell": "daemon:error_model",
+      "transform": { "position": [0, 0, 0], "rotation": [0, 0, 0], "scale": [2, 2, 2] },
+      "material": {
+        "renderType": "daemon:error_rendertype",
+        "uniforms": { "Tint": [1.0, 1.0, 1.0, 1.0], "NoiseAmount": 0.6 }
+      },
+      "modifiers": [
+        {
+          "controller": "charge",
+          "target": "uniform:NoiseAmount",
+          "mode": "replace",
+          "curve": [[0.0, 0.2], [1.0, 1.0]]
+        }
+      ]
+    }
+  ]
+}

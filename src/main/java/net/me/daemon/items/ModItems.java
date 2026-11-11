@@ -18,7 +18,7 @@ public class ModItems {
             Main.get_path("reaper_scythe"),
             new Scythe(ToolMaterials.NETHERITE,new Item.Settings()
                     .attributeModifiers(SwordItem.createAttributeModifiers(
-                            ToolMaterials.NETHERITE, 12, -2f
+                            ToolMaterials.NETHERITE, 10, -2f
                     ))
                     .component(ModComponents.SCYTHE_STATE, false)
             ));

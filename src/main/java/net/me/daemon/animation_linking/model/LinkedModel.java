@@ -1,4 +1,4 @@
-package net.me.daemon.client.animation_linking.model;
+package net.me.daemon.animation_linking.model;
 
 import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;

@@ -15,7 +15,8 @@
     ],
     "client": [
       "net.me.daemon.client.MainClient",
-      "net.me.daemon.client.animation_linking.DaemonAnimationClientInitalizer"
+      "net.me.daemon.animation_linking.DaemonAnimationClientInitalizer",
+      "net.me.daemon.daemonflares.client.DaemonFlaresMainClient"
     ],
     "main": [
       "net.me.daemon.Main"

@@ -1,8 +1,8 @@
-package net.me.daemon.client.animation_linking.debug;
+package net.me.daemon.animation_linking.debug;
 
 
 import net.me.daemon.Main;
-import net.me.daemon.client.animation_linking.records.DaemonLink;
+import net.me.daemon.animation_linking.records.DaemonLink;
 import net.minecraft.util.Identifier;
 
 import java.util.Map;

@@ -17,7 +17,7 @@ import org.lwjgl.glfw.GLFW;
 import java.util.List;
 
 public class AbilityKeys {
-    private static final KeyBinding[] KEYS = new KeyBinding[3];
+    public static final KeyBinding[] KEYS = new KeyBinding[3];
 
     // the default keys the mod starts out with
     private static final int[] DEFAULTS = {GLFW.GLFW_KEY_Z, GLFW.GLFW_KEY_X, GLFW.GLFW_KEY_C};

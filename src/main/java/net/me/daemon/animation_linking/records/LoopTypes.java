@@ -1,8 +1,8 @@
-package net.me.daemon.client.animation_linking.records;
+package net.me.daemon.animation_linking.records;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.me.daemon.client.animation_linking.enums.DaemonLoop;
+import net.me.daemon.animation_linking.enums.DaemonLoop;
 
 public record LoopTypes(DaemonLoop geckolib_loop, DaemonLoop pal_loop) {
 

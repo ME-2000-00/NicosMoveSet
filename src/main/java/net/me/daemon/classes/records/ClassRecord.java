@@ -2,6 +2,8 @@ package net.me.daemon.classes.records;
 
 
 import io.wispforest.owo.ui.core.Component;
+import net.me.daemon.items.interfaces.AbilityWeapon;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -14,6 +16,8 @@ public record ClassRecord(
         Text displayname,
         Text description,
         Text tooltip,
-        ItemStack icon
+        ItemStack icon,
+        PassiveRecord passive,
+        AbilityWeapon starter_item
 ) {
 }

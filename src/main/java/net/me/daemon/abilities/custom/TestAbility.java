@@ -32,6 +32,7 @@ public class TestAbility extends SoulAbility<Unit> {
 
     @Override
     protected boolean validate(ServerPlayerEntity player, Unit data) {
+        // might be better removed for cinematics and stuff, or just use F1
         return !player.isSpectator();
     }
 

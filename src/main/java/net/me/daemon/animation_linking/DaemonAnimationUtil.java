@@ -1,10 +1,10 @@
-package net.me.daemon.client.animation_linking;
+package net.me.daemon.animation_linking;
 
 import com.zigythebird.playeranim.animation.PlayerAnimationController;
 import com.zigythebird.playeranim.api.PlayerAnimationAccess;
 import net.me.daemon.Main;
-import net.me.daemon.client.animation_linking.enums.DaemonLoop;
-import net.me.daemon.client.animation_linking.records.DaemonLink;
+import net.me.daemon.animation_linking.enums.DaemonLoop;
+import net.me.daemon.animation_linking.records.DaemonLink;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.util.Identifier;
 import software.bernie.geckolib.animatable.GeoAnimatable;
@@ -20,7 +20,7 @@ public class DaemonAnimationUtil {
 
     public static <T extends GeoAnimatable> void addLinks(AnimationController<T> controller, Identifier... ids) {
         for (Identifier id : ids) {
-            DaemonLink link = DaemonAnimationBuilder.get(id); // plain lookup
+            DaemonLink link = DaemonAnimationBuilder.get(id); // lookup
             if (link == null) { Main.LOGGER.warn("Unknown link {}", id); continue; }
             controller.triggerableAnim(id.getPath(),
                     RawAnimation.begin().then(link.name(), toGecko(link.loopType().geckolib_loop())));

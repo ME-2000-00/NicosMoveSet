@@ -1,7 +1,7 @@
 package net.me.daemon.items.geoitemrenderers;
 
 import net.me.daemon.Main;
-import net.me.daemon.client.animation_linking.model.LinkedModel;
+import net.me.daemon.animation_linking.model.LinkedModel;
 import net.me.daemon.items.custom.Scythe;
 import software.bernie.geckolib.renderer.GeoItemRenderer;
 import software.bernie.geckolib.renderer.layer.AutoGlowingGeoLayer;

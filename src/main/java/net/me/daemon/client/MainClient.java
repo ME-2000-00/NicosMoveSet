@@ -6,12 +6,14 @@ import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.me.daemon.Main;
 import net.me.daemon.classes.ClassRegistry;
 import net.me.daemon.classes.records.ClassRecord;
-import net.me.daemon.client.animation_linking.DaemonAnimationBuilder;
+import net.me.daemon.classes.records.PassiveRecord;
 import net.me.daemon.client.render.hud.owo.ReaperScytheHUD;
 import net.me.daemon.client.render.gui.owo.ClassScreen;
 import net.me.daemon.items.ModItems;
-import net.me.daemon.links.ModLinks;
+import net.me.daemon.items.custom.Scythe;
+import net.me.daemon.items.interfaces.AbilityWeapon;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.resource.ResourceType;
 import net.minecraft.text.Text;
 import net.minecraft.util.Unit;
@@ -22,8 +24,6 @@ public class MainClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         // other registries
-        ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES).registerReloadListener(new DaemonAnimationBuilder());
-        ModLinks.register();
 
 
         // TODO: note down in notion how to add new abilites and how to add them to weapons
@@ -43,12 +43,22 @@ public class MainClient implements ClientModInitializer {
         });
 
         // classes
+
+        // reaper class
         ClassRegistry.register(
                 new ClassRecord(
                         Main.get_path("reaper_class"),
                         Text.literal("Reaper"),
                         Text.literal("The reaper class"),
-                        new ItemStack(ModItems.SCYTHE)
+                        Text.literal("A class aimed to hunt and kill its enemies"),
+                        new ItemStack(ModItems.SCYTHE),
+                        new PassiveRecord(
+                                Text.literal("Reapers Mark"),
+                                Text.literal("This effect allows you to gain more souls from killed enemies"),
+                                Text.literal("stacks n amount of times, gets applied every hit to the targeted entity"),
+                                new ItemStack(Items.TARGET)
+                        ),
+                        (AbilityWeapon) ModItems.SCYTHE
                 )
         );
 

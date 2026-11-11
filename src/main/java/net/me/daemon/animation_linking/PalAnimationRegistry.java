@@ -1,4 +1,4 @@
-package net.me.daemon.client.animation_linking;
+package net.me.daemon.animation_linking;
 
 import com.zigythebird.playeranim.animation.PlayerRawAnimationBuilder;
 import com.zigythebird.playeranimcore.animation.Animation;

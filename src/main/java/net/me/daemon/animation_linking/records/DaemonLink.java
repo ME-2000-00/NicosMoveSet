@@ -1,4 +1,4 @@
-package net.me.daemon.client.animation_linking.records;
+package net.me.daemon.animation_linking.records;
 
 
 import com.mojang.serialization.Codec;

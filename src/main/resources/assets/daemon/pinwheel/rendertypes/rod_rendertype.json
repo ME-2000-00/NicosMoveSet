@@ -1,0 +1,22 @@
+{
+  "format": "POSITION_TEX_COLOR",
+  "mode": "QUADS",
+  "bufferSize": "TRANSIENT",
+  "sort": false,
+  "affectsCrumbling": false,
+  "outline": false,
+  "layers": [
+    {
+      "type": "veil:shader", "name": "daemon:rod_shader"
+    },
+    {
+      "type": "minecraft:depth_test", "mode": "lequal"
+    },
+    {
+      "type": "minecraft:cull", "face": "back"
+    },
+    {
+      "type": "minecraft:write_mask", "color": true, "depth": true
+    }
+  ]
+}

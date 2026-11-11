@@ -1,4 +1,4 @@
-package net.me.daemon.client.animation_linking;
+package net.me.daemon.animation_linking;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
@@ -6,8 +6,8 @@ import com.google.gson.JsonParser;
 import com.mojang.serialization.JsonOps;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.me.daemon.Main;
-import net.me.daemon.client.animation_linking.debug.DaemonLinkDebug;
-import net.me.daemon.client.animation_linking.records.DaemonLink;
+import net.me.daemon.animation_linking.debug.DaemonLinkDebug;
+import net.me.daemon.animation_linking.records.DaemonLink;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.util.Identifier;
 
@@ -18,28 +18,19 @@ import java.util.Map;
 
 public class DaemonAnimationBuilder implements SimpleSynchronousResourceReloadListener {
     private static Map<Identifier, DaemonLink> LINKS = new HashMap<>();
-    private DaemonLink current;
 
     private static String FOLDER = "daemon_links";
     private static String EXTENSION = ".json";
 
 
-    public static DaemonAnimationBuilder begin() {
-        return new DaemonAnimationBuilder();
-    }
-
     // gets the loaded linked file
-    public void link(Identifier link_id) {
-        current = LINKS.get(link_id);
-        DaemonLinkDebug.log(link_id, current);
+    public static DaemonLink get(Identifier link_id) {
+        DaemonLink link = LINKS.get(link_id);
+        DaemonLinkDebug.log(link_id, link);
 
-        if (current == null) Main.LOGGER.warn("Unknown link {}", link_id);
+        if (link == null) Main.LOGGER.warn("Unknown link {}", link_id);
 
-    }
-
-
-    public static DaemonLink get(Identifier id) {
-        return LINKS.get(id);
+        return link;
     }
 
 
@@ -48,6 +39,13 @@ public class DaemonAnimationBuilder implements SimpleSynchronousResourceReloadLi
         return Main.get_path("daemon_animation_registry_listener");
     }
 
+
+
+    // TODO:        redo json structure since we have an issue with geckolib animations only using one file per animation
+    //              so we need to change it to per animation in one geo file not per file, but that's only smth for geckolib
+    //              PAL is fine
+    //              so it needs to link x amount of PAL files to one geckolib file with the same x amount of animations with the same name, i think
+    //              let me check the geckolib docs on that again
     @Override
     public void reload(ResourceManager manager) {
         Map<Identifier, DaemonLink> parsed = new HashMap<>();

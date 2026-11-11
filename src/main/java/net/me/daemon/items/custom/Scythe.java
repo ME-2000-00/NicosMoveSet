@@ -3,9 +3,8 @@ package net.me.daemon.items.custom;
 import net.me.daemon.Main;
 import net.me.daemon.abilities.abilityextends.Ability;
 import net.me.daemon.client.ModAbilities;
-import net.me.daemon.client.animation_linking.DaemonAnimationBuilder;
-import net.me.daemon.client.animation_linking.DaemonAnimationNetwork;
-import net.me.daemon.client.animation_linking.DaemonAnimationUtil;
+import net.me.daemon.animation_linking.DaemonAnimationNetwork;
+import net.me.daemon.animation_linking.DaemonAnimationUtil;
 import net.me.daemon.items.geoitemrenderers.ScytheRenderer;
 import net.me.daemon.items.interfaces.AbilityWeapon;
 import net.minecraft.client.render.item.BuiltinModelItemRenderer;
@@ -99,7 +98,11 @@ public class Scythe extends SwordItem implements GeoItem, AbilityWeapon {
     // TODO: add all 3 abilities
     @Override
     public List<Ability<?>> getAbilities() {
-        return List.of(ModAbilities.TEST_ABILITY);
+        return List.of(
+                ModAbilities.TEST_ABILITY,
+                ModAbilities.TEST_ABILITY,
+                ModAbilities.TEST_ABILITY
+        );
     }
 
     @Override

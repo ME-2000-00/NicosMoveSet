@@ -1,4 +1,4 @@
-package net.me.daemon.client.animation_linking;
+package net.me.daemon.animation_linking;
 
 import com.zigythebird.playeranim.animation.PlayerAnimationController;
 import com.zigythebird.playeranim.api.PlayerAnimationFactory;
@@ -7,14 +7,17 @@ import com.zigythebird.playeranimcore.api.firstPerson.FirstPersonMode;
 import com.zigythebird.playeranimcore.enums.PlayState;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.me.daemon.packets.S2C.PalPlayPayload;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
+import net.minecraft.resource.ResourceType;
 
-import static net.me.daemon.client.animation_linking.DaemonAnimationUtil.PAL_LAYER;
+import static net.me.daemon.animation_linking.DaemonAnimationUtil.PAL_LAYER;
 
 public class DaemonAnimationClientInitalizer implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
+        ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES).registerReloadListener(new DaemonAnimationBuilder());
 
         PlayerAnimationFactory.ANIMATION_DATA_FACTORY.registerFactory(PAL_LAYER, 1000,
                 player -> {

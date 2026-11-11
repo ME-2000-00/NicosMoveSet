@@ -1,0 +1,7 @@
+{
+  "vertex": "daemon:rod_shader",
+  "fragment": "daemon:rod_shader",
+  "textures": {
+    "DefaultSampler": "daemon:textures/flare/rod.png"
+  }
+}

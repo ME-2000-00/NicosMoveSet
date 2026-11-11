@@ -3,6 +3,7 @@ package net.me.daemon.commands;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.me.daemon.Main;
+import net.me.daemon.commands.custom.GetFlares;
 import net.me.daemon.commands.custom.GetMarked;
 import net.me.daemon.commands.custom.MarkedTestCommand;
 import net.me.daemon.commands.custom.OpenScreen;
@@ -19,7 +20,8 @@ public class ModCommands {
     private static final List<Supplier<ModCommand>> COMMANDS = List.of(
             MarkedTestCommand::new,
             GetMarked::new,
-            OpenScreen::new
+            OpenScreen::new,
+            GetFlares::new
     );
 
     public static void register() {
